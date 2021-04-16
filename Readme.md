@@ -1,1 +1,1 @@
-# This is the CCPS Website
+# This is The Credit Card Processing System's Website
