@@ -86,6 +86,32 @@ app.get("/register",function(req,res){
     res.render("register");
 });
 
+app.get("/view",function(req,res){
+  res.render("view");
+});
+
+app.post("/search", function(req,res){
+  const aadhar = req.body.aadhar;
+  sess = req.session;
+  User.findOne({aadhar:aadhar}, function(err,foundAadhar){
+    if(err){
+      console.log(err);
+    }
+    else{
+      if(foundAadhar){
+        const name = foundAadhar.name;
+        const email = foundAadhar.email;
+        const sex = foundAadhar.sex;
+        console.log(name,email,sex);
+        
+      }
+      else{
+        res.render("details",{ecode:0});
+      }
+    }
+  })
+});
+
 app.listen(3000,function(){
 console.log("Server started on port 3000.");
 });
