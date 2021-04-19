@@ -1,0 +1,46 @@
+<%- include('partials/header') %>
+
+<form class="form-signin" action="/register" method="POST">
+    <div class = "container">
+        <i class="fas fa-credit-card fa-4x" style="padding:10px"></i>
+        <h1 class="h3 mb-3 font-weight-normal">Please enter your details</h1>
+        <h5> Basic Details :</h5>
+    
+        <label for="inputName" class="sr-only">Full Name</label>
+        <input id="inputName" class="form-control" placeholder="Full name" name ="name" required>
+    
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input id="inputEmail" class="form-control" placeholder="Email address" name = "email" required>
+    
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type = "password" id="inputPassword" class="form-control" placeholder="Password" name ="password" required>
+
+        <h5> Other Details :</h5>
+    
+        <label for="inputAddr" class="sr-only">Address</label>
+        <input id="inputAddr" class="form-control" placeholder="Address" name = "address" required>
+    
+        <label for="inputAadhar" class="sr-only">Aadhar Number</label>
+        <input id="inputAadhar" class="form-control" placeholder="Aadhar Number" name = "aadhar" required>
+    
+        <div class="inputDOB">
+            <input placeholder="Date of Birth" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" name="date">
+        </div>
+
+        <div class="inputSex">
+            <select id="Sex" name="sex" class="form-control">
+                <option value="" disabled selected hidden>Sex</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>  
+        <br>
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Register"><br>
+        <label>
+            Already have an account? <a href = "/login"> Login</a>
+        </label>
+    </div>
+</form>
+
+<% include ('partials/footer') %> 

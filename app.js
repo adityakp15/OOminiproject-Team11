@@ -20,8 +20,13 @@ app.use(bodyParser.urlencoded({
 mongoose.connect("mongodb://localhost:27017/ccDB");
 
 const userSchema = {
+    name : String,
     email: String,
-    password: String
+    password: String,
+    address : String,
+    aadhar : String,
+    dob : Date,
+    sex : String
   };
   
 const User = new mongoose.model("User",userSchema);
@@ -29,6 +34,10 @@ const User = new mongoose.model("User",userSchema);
 app.get("/",function(req,res){
     res.render("login");
   });
+
+app.get("/login",function(req,res){
+    res.render("login");
+});
 
 app.post("/login", function(req,res){
 const emailid = req.body.email;
@@ -48,10 +57,33 @@ User.findOne({email: emailid, password: pwd}, function(err,foundUser){
     else{
         res.render("login");
     }
-}});
+    }});
 });
 
+app.post("/register", function(req,res){
+    console.log("a mass");
+    const newUser = new User({
+        emailid : req.body.email,
+        pwd : req.body.password,
+        name : req.body.name,
+        aadhar : req.body.aadhar,
+        sex : req.body.sex,
+        date : req.body.date
+      });
+    //   console.log(emailid,pwd,name,aadhar,sex,date);
+      newUser.save(function(err){
+        if(err){
+          res.send(err);
+        }
+        else{
+          res.render("register");
+        }
+      });
+    });
 
+app.get("/register",function(req,res){
+    res.render("register");
+});
 
 app.listen(3000,function(){
 console.log("Server started on port 3000.");
