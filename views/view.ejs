@@ -2,20 +2,35 @@
 
 <%- include('partials/navbar') %>
 
-<div class="catalog">
-  <i class="fas fa-book-open fa-6x "></i>
-  <h1 class="display-6 title">Exam Catalog</h1>
-
-  <form action="/search" method="POST">
-    <div class="searchBox">
-          <input class="searchInput"type="text" name="code" placeholder="Exam Code" autocomplete="off">
-          <button class="searchButton">
-              <i class="fas fa-search"></i>
-          </button>
-      </div>
-  </form>
-
+<div class="animated bounceInDown">
+  <div class="container-search">
+    <span class="animated tada"></span>
+        <form name="form3" class="box" action="/registerExam" method="POST">
+          <h4>Search<span>Result</span></h4>
+          <br>
+          <% if(ecode == "0"){%>
+            <h5>No matching results.</h5>
+          <%}else{%>
+            <table class="exam-details">
+              <tr>
+                <th>Exam Code</th>
+                <td><%= ecode %></td>
+              </tr>
+              <tr>
+                <th>Exam Name</th>
+                <td><%= ename %></td>
+              </tr>
+              <tr>
+                <th>Mumber of registrations</th>
+                <td><%= ename %></td>
+              </tr>
+            </table>
+            <input type="hidden" name="name" value="<%= ename %>">
+            <input type="hidden" name="code" value="<%= ecode %>">
+            <input type="submit" value="Register" class="btn1">
+          <%}%>
+        </form>
+        <a href="/view" class="search-go-back">Go Back</a>
+  </div>
 </div>
-
-
 <%- include('partials/footer') %>
