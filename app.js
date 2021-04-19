@@ -51,7 +51,7 @@ User.findOne({email: emailid, password: pwd}, function(err,foundUser){
     else{
     if(foundUser){
         sess = req.session;
-        sess.email = email;
+        sess.email = emailid;
         res.render("login");
         console.log("logged in",emailid,pwd);
     }
