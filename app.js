@@ -42,17 +42,18 @@ app.get("/login",function(req,res){
 app.post("/login", function(req,res){
 const emailid = req.body.email;
 const pwd = req.body.password;
-console.log(emailid,pwd);
+// console.log(emailid,pwd);
 User.findOne({email: emailid, password: pwd}, function(err,foundUser){
+
     if(err){
     console.log(err);
     }
     else{
     if(foundUser){
         sess = req.session;
-        sess.email = emailid;
+        sess.email = email;
         res.render("login");
-        console.log("created",emailid,pwd);
+        console.log("logged in",emailid,pwd);
     }
     else{
         res.render("login");
@@ -63,14 +64,14 @@ User.findOne({email: emailid, password: pwd}, function(err,foundUser){
 app.post("/register", function(req,res){
     console.log("a mass");
     const newUser = new User({
-        emailid : req.body.email,
-        pwd : req.body.password,
+        email : req.body.email,
+        password : req.body.password,
         name : req.body.name,
         aadhar : req.body.aadhar,
         sex : req.body.sex,
-        date : req.body.date
+        dob : req.body.date
       });
-    //   console.log(emailid,pwd,name,aadhar,sex,date);
+      console.log(req.body.email,req.body.password,req.body.name,req.body.aadhar,req.body.sex,req.body.dob);
       newUser.save(function(err){
         if(err){
           res.send(err);
