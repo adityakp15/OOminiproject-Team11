@@ -1,92 +1,88 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.80.0">
-    <title>Register</title>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <meta name="generator" content="Hugo 0.80.0">
+        <title>Login</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/sign-in/">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-
-
-    <!-- Bootstrap core CSS -->
-    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/sign-in/">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
 
+        <!-- Bootstrap core CSS -->
+        <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
+        <style>
+            .bd-placeholder-img {
+                font-size: 1.125rem;
+                text-anchor: middle;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
+            @media (min-width: 768px) {
+                .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+                }
+            }
 
+            select:invalid{
+                color: gray;
+            }
+            option{
+                color: gray;
+            }
+        </style>
+        <!-- Custom styles for this template -->
+        <link href="signin.css" rel="stylesheet">
+    </head>
+    <body class="text-center">
+        <form class="form-signin">
+            <div class = "container">
+                <i class="fas fa-credit-card fa-4x" style="padding:10px"></i>
+                <h1 class="h3 mb-3 font-weight-normal">Please enter your details</h1>
+                <h5> Basic Details :</h5>
+            
+                <label for="inputName" class="sr-only">Full name</label>
+                <input id="inputName" class="form-control" placeholder="Full name" required>
+            
+                <label for="inputEmail" class="sr-only">Email address</label>
+                <input id="inputEmail" class="form-control" placeholder="Email address" required>
+            
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type = "password" id="inputPassword" class="form-control" placeholder="Password" required>
 
-    <!-- Custom styles for this template -->
-    <link href="register.css" rel="stylesheet">
-  </head>
-  <body class="text-center">
+                <h5> Other Details :</h5>
+            
+                <label for="inputAddr" class="sr-only">Address</label>
+                <input id="inputAddr" class="form-control" placeholder="Address" required>
+            
+                <label for="inputAadhar" class="sr-only">Aadhar number</label>
+                <input id="inputAadhar" class="form-control" placeholder="Aadhar" required>
+            
+                <div class="inputDOB">
+                    <input placeholder="Date of Birth" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date">
+                </div>
 
-<form class="form-signin">
-  <i class="fas fa-credit-card fa-4x" style="padding:10px"></i>
-  <h1 class="h3 mb-3 font-weight-normal">Please enter your details</h1>
-
-  <label for="inputUser" class="sr-only">User name</label>
-  <input id="inputUser" class="form-control" placeholder="User name" required autofocus>
-
-  <label for="inputName" class="sr-only">Full name</label>
-  <input id="inputName" class="form-control" placeholder="Full name" required>
-
-  <label for="inputEmail" class="sr-only">Email address</label>
-  <input id="inputEmail" class="form-control" placeholder="Email address" required>
-
-  <label for="inputPassword" class="sr-only">Password</label>
-  <input id="inputPassword" class="form-control" placeholder="Password" required>
-
-  <div class="inputDOB">
-    <label for="DOB">DOB:</label>
-    <input type="date" id="DOB" name="DOB">
-  </div>
-
-  <label for="inputAddr" class="sr-only">Address</label>
-  <input id="inputAddr" class="form-control" placeholder="Address" required>
-
-  <label for="inputAadhar" class="sr-only">Aadhar number</label>
-  <input id="inputAadhar" class="form-control" placeholder="Aadhar" required>
-
-  <p style="text-align:left;">Sex:</p>
-  <div class="inputSex">
-    <input type="radio" id="male" name="gender" value="male">
-    <label for="male">Male</label><br>
-    <input type="radio" id="female" name="gender" value="female">
-    <label for="female">Female</label><br>
-    <input type="radio" id="other" name="gender" value="other">
-    <label for="other">Other</label>
-  </div>  
-
-  <div class="checkbox mb-3">
-    <label>
-      or <a href = "">log in</a>
-    </label>
-  </div>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-  <p class="mt-5 mb-3 text-muted">&copy; 2018-2021</p>
-</form>
-
-
-
-  </body>
+                <div class="inputSex">
+                    <select id="Sex" name="Sex"class="form-control">
+                        <option value="" disabled selected hidden>Sex</option>
+                        <option value="volvo">Male</option>
+                        <option value="saab">Female</option>
+                         <option value="fiat">Other</option>
+                    </select>
+                </div>  
+                <br>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button> <br>
+                <label>
+                    Don't have an account? <a href = "./registrationForm.html"> Register</a>
+                </label>
+            </div>
+        </form>
+    </body>
 </html>
