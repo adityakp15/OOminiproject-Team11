@@ -17,10 +17,10 @@ app.use(bodyParser.urlencoded({
   extended:true
 }));
 
-mongoose.connect("mongodb://localhost:27017/ccps");
+mongoose.connect("mongodb://localhost:27017/ccDB");
 
 const userSchema = {
-    username: String,
+    email: String,
     password: String
   };
   
@@ -29,6 +29,29 @@ const User = new mongoose.model("User",userSchema);
 app.get("/",function(req,res){
     res.render("login");
   });
+
+app.post("/login", function(req,res){
+const emailid = req.body.email;
+const pwd = req.body.password;
+console.log(emailid,pwd);
+User.findOne({email: emailid, password: pwd}, function(err,foundUser){
+    if(err){
+    console.log(err);
+    }
+    else{
+    if(foundUser){
+        sess = req.session;
+        sess.email = emailid;
+        res.render("login");
+        console.log("created",emailid,pwd);
+    }
+    else{
+        res.render("login");
+    }
+}});
+});
+
+
 
 app.listen(3000,function(){
 console.log("Server started on port 3000.");
