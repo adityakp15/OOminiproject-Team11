@@ -9,7 +9,7 @@ html, body {
 }
 
 .container{
-    margin: 0;
+    margin: auto;
     top: 50%;
     left: 50%;
     width: 150%;
@@ -61,4 +61,20 @@ body {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+table {
+    justify-content: center;
+    margin: 2% 0;
+    min-width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+td, th {
+    text-align : center;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #ffffff;
 }
