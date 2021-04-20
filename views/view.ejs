@@ -1,20 +1,43 @@
-<%- include('partials/header') %>
+<%- include('partials/view-header') %>
 
-<%- include('partials/navbar') %>
-
-<div class="catalog">
-  <i class="fas fa-book-open fa-6x "></i>
-  <h1 class="display-6 title">Exam Catalog</h1>
-
-  <form action="/search" method="POST">
-    <div class="searchBox">
-          <input class="searchInput"type="text" name="aadhar" placeholder="Aadhar Number" autocomplete="off">
-          <button class="searchButton">
-              <i class="fas fa-search"></i>
-          </button>
+<div class="form-signin">
+  <div class = "container">
+      <h1 class="h3 mb-3 font-weight-normal"> <i class="fas fa-user-circle fa-lg"> </i> User Details </h1>
+      <div class="flex-container">
+          <div>
+              <div class="card">
+                  <img src="assets/img_male.png" alt="Avatar" style="width:100%">
+                  <h4><b>Avinash Kartik</b></h4> 
+              </div>
+          </div>
+          <div>
+              <table>
+                  <tr>
+                      <td> Email </td>
+                      <td> A@gmail.com </td>
+                  </tr>
+                  <tr>
+                      <td> Address </td>
+                      <td> hahaha </td>
+                  </tr>
+                  <tr>
+                      <td> Aadhar </td>
+                      <td> 8671 1826 </td>
+                  </tr>
+                  <tr>
+                      <td> Gender </td>
+                      <td> Male </td>
+                  </tr>
+                  <tr>
+                      <td> DOB </td>
+                      <td> 2/6/2001 </td>
+                  </tr>
+              </table>
+          </div> 
       </div>
-  </form>
-
+      <br>
+      <h1 class="h3 mb-3 font-weight-normal"> <i class="fas fa-credit-card fa-lg"> </i> Card Details </h1>
+  </div>
 </div>
 
 
