@@ -34,6 +34,8 @@ const detailSchema = {
 }
 const User = new mongoose.model("User",userSchema);
 
+// LOGIN PAGE
+
 app.get("/",function(req,res){
     res.render("login");
   });
@@ -45,9 +47,9 @@ app.get("/login",function(req,res){
 app.post("/login", function(req,res){
 const emailid = req.body.email;
 const pwd = req.body.password;
+let name;
 // console.log(emailid,pwd);
 User.findOne({email: emailid, password: pwd}, function(err,foundUser){
-
     if(err){
     console.log(err);
     }
@@ -55,14 +57,28 @@ User.findOne({email: emailid, password: pwd}, function(err,foundUser){
     if(foundUser){
         sess = req.session;
         sess.email = emailid;
+        User.find({email:emailid},function(err,user){
+          if(err)
+          {
+            console.log(err);
+          }
+        });
+        sess.name = foundUser.name;
+        console.log(sess.name);
         console.log("rendering dashboard");
-        res.render("dashboard");
+        res.render("dashboard",{name:foundUser.name});
         console.log("logged in",emailid,pwd);
     }
     else{
         res.render("login");
     }
     }});
+});
+
+// REGISTER PAGE
+
+app.get("/register",function(req,res){
+  res.render("register");
 });
 
 app.post("/register", function(req,res){
@@ -86,28 +102,17 @@ app.post("/register", function(req,res){
       });
     });
 
-app.get("/register",function(req,res){
-    res.render("register");
+// DASHBOARD
+
+app.get("/dashboard", function(req , res){
+  res.render("dashboard");
+  console.log("in dashbaoard");
 });
+// VIEW PAGE
 
 app.get("/view",function(req,res){
   res.render("view");
-});
-
-app.get("/payBalance",function(req,res){
-  res.render("payBalance");
-});
-
-app.get("/cardPlans",function(req,res){
-  res.render("cardPlans");
-});
-
-app.get("/transfer",function(req,res){
-  res.render("transfer");
-});
-
-app.get("/admin-plan",function(req,res){
-  res.render("admin-plan");
+  
 });
 
 app.post("/search", function(req,res){
@@ -131,11 +136,30 @@ app.post("/search", function(req,res){
     }
   })
 });
+// PAY BALANCE PAGE
 
 app.get("/payBalance",function(req,res){
-  res.render("payBalance")
+  res.render("payBalance");
+});
 
-})
+// CARD PLANS PAGE
+
+app.get("/cardPlans",function(req,res){
+  res.render("cardPlans");
+});
+
+// TRANSFER PAGE
+
+app.get("/transfer",function(req,res){
+  res.render("transfer");
+});
+
+app.get("/admin-plan",function(req,res){
+  res.render("admin-plan");
+});
+
+
+
 app.listen(3000,function(){
 console.log("Server started on port 3000.");
 });
