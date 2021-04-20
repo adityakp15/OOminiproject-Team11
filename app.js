@@ -90,6 +90,22 @@ app.get("/view",function(req,res){
   res.render("view");
 });
 
+app.get("/payBalance",function(req,res){
+  res.render("payBalance");
+});
+
+app.get("/cardPlans",function(req,res){
+  res.render("cardPlans");
+});
+
+app.get("/transfer",function(req,res){
+  res.render("transfer");
+});
+
+app.get("/admin-plan",function(req,res){
+  res.render("admin-plan");
+});
+
 app.post("/search", function(req,res){
   const aadhar = req.body.aadhar;
   sess = req.session;
@@ -112,6 +128,10 @@ app.post("/search", function(req,res){
   })
 });
 
+app.get("/payBalance",function(req,res){
+  res.render("payBalance")
+
+})
 app.listen(3000,function(){
 console.log("Server started on port 3000.");
 });

@@ -6,3 +6,7 @@ Card Catalog
 Apply
 Change Plan
 
+admin page:
+approve cards
+change card plans
+
