@@ -5,7 +5,7 @@
   #hero {
     width: 100%;
     height: 50vh;
-    background: url(public/assets/clouds.jpg) no-repeat center center fixed;
+    background: url(../assets/clouds.jpg) no-repeat center center fixed;
     background-position: 0 -140px; 
     background-size: cover;
     position: relative;

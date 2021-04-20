@@ -1,3 +1,78 @@
 <%- include('partials/header') %>
-<h1>Welcome, <%=name %> </h1>
+<section id="hero" class="d-flex align-items-center">
+    <div class="container" data-aos="zoom-out" data-aos-delay="100">
+        <h1>Welcome <span> XYZ </span> </h1>
+        <h2>We hope you are enjoying our services! </h2>
+    </div>
+</section>
+<main id="main">
+    <section id="about" class="about section-bg">
+        <div class="container" data-aos="fade-up">
+            <div class="section-title">
+                <h2>About</h2>
+                <h3>Find Out More <span>About Us</span></h3>
+                <p>Welcome aboard to our CCPS Family!</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6" data-aos="zoom-out" data-aos-delay="100">
+                    <img width="5000px" height="5000px" src="assets/card.png" class="img-fluid" alt="">
+                </div>
+                <div class="col-lg-6 pt-4 pt-lg-0 content d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Ever strugged to complete your payment? Well, that ends today!</h3>
+                    <p class="font-italic">
+                        Our team uses the latest frameworks, to provide a hassle free payment environment which is 100% secure.
+                    </p>
+                    <ul>
+                        <li>
+                            <i class="bx bx-credit-card"></i>
+                            <div>
+                                <h5> We have some exciting new card plans in store for you. </h5>
+                                <p> Head over to our card catalogue to find out which of our plans suit you best. </p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="bx bx-user"></i>
+                            <div>
+                                <h5> We have a custom made account card waiting to be checked out by you. </h5>
+                                <p> All of your details are stored securely and and are displayed exquisitely in your account details section. </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="services" class="services">
+        <div class="container" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Services</h2>
+                <h3>Check out our <span>Services</span></h3>
+                <p>We offer all the top services with 24/7 assistance!</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bx bx-credit-card"></i></div>
+                        <h4><a href="">Card Catalogue</a></h4>
+                        <p>Choose a new card plan or upgrade your existing plan!</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bx bx-transfer"></i></div>
+                        <h4><a href="">Transfer Funds</a></h4>
+                        <p>Transfer funds with ease to another account!</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bx bx-money"></i></div>
+                        <h4><a href="">Pay Dues</a></h4>
+                        <p>You do not have to go though any more hassle to pay off your dues!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 <% include ('partials/footer') %> 
