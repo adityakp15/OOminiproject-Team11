@@ -6,31 +6,35 @@
       <div class="flex-container">
           <div>
               <div class="card">
-                  <img src="assets/img_male.png" alt="Avatar" style="width:100%">
-                  <h4><b><% =name %> </b></h4> 
+                <% if(sex == "Male"){%>
+                    <img src="assets/img_male.png" alt="Avatar" style="width:100%">
+                <%}else{%>
+                    <img src="assets/img_female.png" alt="Avatar" style="width:100%">
+                <%}%>
+                <h4><b><%= name %> </b></h4> 
               </div>
           </div>
           <div>
               <table>
                   <tr>
                       <td> Email </td>
-                      <td> <% =email %>  </td>
+                      <td> <%= email %>  </td>
                   </tr>
                   <tr>
                       <td> Address </td>
-                      <td> <% =address %>  </td>
+                      <td> <%= address %>  </td>
                   </tr>
                   <tr>
                       <td> Aadhar </td>
-                      <td> <% =aadhar %>  </td>
+                      <td> <%= aadhar %>   </td>
                   </tr>
                   <tr>
                       <td> Gender </td>
-                      <td> <% =sex %>  </td>
+                      <td> <%= sex %>   </td>
                   </tr>
                   <tr>
                       <td> DOB </td>
-                      <td> <% =dob %>  </td>
+                      <td> <%= dob %>   </td>
                   </tr>
               </table>
           </div> 
