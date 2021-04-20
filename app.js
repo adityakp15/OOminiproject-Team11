@@ -116,6 +116,10 @@ app.post("/search", function(req,res){
   })
 });
 
+app.get("/payBalance",function(req,res){
+  res.render("payBalance")
+
+})
 app.listen(3000,function(){
 console.log("Server started on port 3000.");
 });
