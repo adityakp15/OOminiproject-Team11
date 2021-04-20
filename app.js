@@ -35,6 +35,7 @@ const detailSchema = {
 const User = new mongoose.model("User",userSchema);
 
 // LOGIN PAGE
+let name;
 
 app.get("/",function(req,res){
     res.render("login");
@@ -47,7 +48,6 @@ app.get("/login",function(req,res){
 app.post("/login", function(req,res){
 const emailid = req.body.email;
 const pwd = req.body.password;
-let name;
 // console.log(emailid,pwd);
 User.findOne({email: emailid, password: pwd}, function(err,foundUser){
     if(err){
@@ -105,13 +105,18 @@ app.post("/register", function(req,res){
 // DASHBOARD
 
 app.get("/dashboard", function(req , res){
-  res.render("dashboard");
-  console.log("in dashbaoard");
+  res.render("dashboard",{name:sess.name});
+  console.log("in dashboard");
+  console.log(name);
 });
 // VIEW PAGE
 
 app.get("/view",function(req,res){
-  res.render("view");
+  sess = req.session;
+  sess.name = name;
+  res.render("view",{name:name});
+  console.log(name);
+  
   
 });
 
