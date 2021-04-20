@@ -168,6 +168,15 @@ app.get("/admin-plan",function(req,res){
   res.render("admin-plan");
 });
 
+app.get("/logout", function(req,res){
+  req.session.destroy((err) => {
+        if(err) {
+            return console.log(err);
+        }
+        console.log("Session destroyed successfully");
+        res.redirect('/');
+  });
+});
 
 
 app.listen(3000,function(){
