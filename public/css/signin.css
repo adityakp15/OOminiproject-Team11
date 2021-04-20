@@ -9,7 +9,7 @@ html, body {
 }
 
 .container{
-    margin: 0;
+    margin: auto;
     top: 50%;
     left: 50%;
     width: 150%;
@@ -63,4 +63,22 @@ body {
     border-top-right-radius: 0;
 }
 
+<<<<<<< HEAD
 .lh-condensed { line-height: 1.25; }
+=======
+table {
+    justify-content: center;
+    margin: 2% 0;
+    min-width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+td, th {
+    text-align : center;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #ffffff;
+}
+>>>>>>> c69072ecd46d502206a2581a995f9a34cfe5f9ab
