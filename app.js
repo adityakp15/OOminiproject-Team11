@@ -32,7 +32,7 @@ const userSchema = {
 const User = new mongoose.model("User",userSchema);
 
 app.get("/",function(req,res){
-    res.render("cardPlans");
+    res.render("transfer");
   });
 
 app.get("/login",function(req,res){
@@ -96,6 +96,10 @@ app.get("/payBalance",function(req,res){
 
 app.get("/cardPlans",function(req,res){
   res.render("cardPlans");
+});
+
+app.get("/transfer",function(req,res){
+  res.render("transfer");
 });
 
 app.post("/search", function(req,res){
