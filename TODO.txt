@@ -8,5 +8,5 @@ Change Plan
 
 admin page:
 approve cards
-cahnge card plans
+change card plans
 
