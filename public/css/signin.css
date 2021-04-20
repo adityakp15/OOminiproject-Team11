@@ -82,3 +82,9 @@ tr:nth-child(even) {
     background-color: #ffffff;
 }
 >>>>>>> c69072ecd46d502206a2581a995f9a34cfe5f9ab
+
+.paymentContainer {
+  max-width: 960px;
+}
+
+.lh-condensed { line-height: 1.25; }

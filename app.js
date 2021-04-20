@@ -90,6 +90,10 @@ app.get("/view",function(req,res){
   res.render("view");
 });
 
+app.get("/payBalance",function(req,res){
+  res.render("payBalance");
+});
+
 app.post("/search", function(req,res){
   const aadhar = req.body.aadhar;
   sess = req.session;
