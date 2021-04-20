@@ -35,7 +35,7 @@ const detailSchema = {
 const User = new mongoose.model("User",userSchema);
 
 app.get("/",function(req,res){
-    res.render("payBalance");
+    res.render("login");
   });
 
 app.get("/login",function(req,res){
@@ -95,6 +95,18 @@ app.get("/view",function(req,res){
 
 app.get("/payBalance",function(req,res){
   res.render("payBalance");
+});
+
+app.get("/cardPlans",function(req,res){
+  res.render("cardPlans");
+});
+
+app.get("/transfer",function(req,res){
+  res.render("transfer");
+});
+
+app.get("/admin-plan",function(req,res){
+  res.render("admin-plan");
 });
 
 app.post("/search", function(req,res){
