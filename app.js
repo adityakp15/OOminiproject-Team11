@@ -29,6 +29,9 @@ const userSchema = {
     sex : String
   };
   
+const detailSchema = {
+  
+}
 const User = new mongoose.model("User",userSchema);
 
 app.get("/",function(req,res){
