@@ -6,8 +6,12 @@
       <div class="flex-container">
           <div>
               <div class="card">
-                  <img src="assets/img_male.png" alt="Avatar" style="width:100%">
-                  <h4><b><%= name %> </b></h4> 
+                <% if(sex == "Male"){%>
+                    <img src="assets/img_male.png" alt="Avatar" style="width:100%">
+                <%}else{%>
+                    <img src="assets/img_female.png" alt="Avatar" style="width:100%">
+                <%}%>
+                <h4><b><%= name %> </b></h4> 
               </div>
           </div>
           <div>
