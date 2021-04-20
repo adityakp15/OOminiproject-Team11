@@ -30,41 +30,59 @@
                 }
             }
 
+            .card {
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+                transition: 0.3s;
+                width: 100%;
+            }
+
+            .card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            }
+
         </style>
         <!-- Custom styles for this template -->
-        <link href="public/css/signin.css" rel="stylesheet">
+        <link href="public/css/view.css" rel="stylesheet">
     </head>
     <body class="text-center">
         <div class="form-signin">
-        <div class = "container">
-            <h1 class="h3 mb-3 font-weight-normal"> <i class="fas fa-user-circle fa-lg"> </i> User Details </h1>
-            <table>
-                <tr>
-                    <td> Name </td>
-                    <td> Avinash </td>
-                </tr>
-                <tr>
-                    <td> Email </td>
-                    <td> Avinash </td>
-                </tr>
-                <tr>
-                    <td> Aaddress </td>
-                    <td> Avinash </td>
-                </tr>
-                <tr>
-                    <td> Aadhar </td>
-                    <td> Avinash </td>
-                </tr>
-                <tr>
-                    <td> Gender </td>
-                    <td> Avinash </td>
-                </tr>
-                <tr>
-                    <td> DOB </td>
-                    <td> Avinash </td>
-                </tr>
-            </table>
+            <div class = "container">
+                <h1 class="h3 mb-3 font-weight-normal"> <i class="fas fa-user-circle fa-lg"> </i> User Details </h1>
+                <div class="flex-container">
+                    <div>
+                        <div class="card">
+                            <img src="./public/assets/img_male.png" alt="Avatar" style="width:100%">
+                            <h4><b>Avinash Kartik</b></h4> 
+                        </div>
+                    </div>
+                    <div>
+                        <table>
+                            <tr>
+                                <td> Email </td>
+                                <td> A@gmail.com </td>
+                            </tr>
+                            <tr>
+                                <td> Address </td>
+                                <td> hahaha </td>
+                            </tr>
+                            <tr>
+                                <td> Aadhar </td>
+                                <td> 8671 1826 </td>
+                            </tr>
+                            <tr>
+                                <td> Gender </td>
+                                <td> Male </td>
+                            </tr>
+                            <tr>
+                                <td> DOB </td>
+                                <td> 2/6/2001 </td>
+                            </tr>
+                        </table>
+                    </div> 
+                </div>
+                <br>
+                <h1 class="h3 mb-3 font-weight-normal"> <i class="fas fa-credit-card fa-lg"> </i> Card Details </h1>
+            </div>
         </div>
-    </div>
     </body>
 </html>
