@@ -32,7 +32,8 @@ const userSchema = {
       number : Number,
       cvv : Number,
       plan : String,
-      status : String
+      status : String,
+      balance : Number
     }
 };
 
@@ -193,6 +194,12 @@ app.get("/delplan",function(req,res){
   });
 });
 
+app.get("/approve",function(req,res){
+  User.find({"card.status":"Inactive"},function(err, foundUsers){
+    res.render("approve",{users: foundUsers});
+  });
+});
+
 app.post("/addplan", function(req,res){
   const newPlan = new Plan({
       name : req.body.inputPlanName,
@@ -232,20 +239,33 @@ app.get("/:url", function(req,res){
     //const mail = "a@b.com";
     sess = req.session;
     const mail = sess.email;
-    User.updateOne({email:mail},{ 'card.plan' : arg , 'card.status' : 'Inactive'}).exec((err, posts) => {
-      if(err)
-        console.log(err)
-      else
-        console.log(posts)
-    })
+    Plan.findOne({id : arg},function(err,foundPlan){
+      if(foundPlan){
+        const balance = foundPlan.allowance;
+        console.log(balance,foundPlan.allowance,foundPlan.id);
+        User.updateOne({email:mail},{ 'card.plan' : arg , 'card.status' : 'Inactive' , 'card.balance' : balance}).exec((err, posts) => {
+          if(err)
+            console.log(err);
+          else
+            console.log(posts);
+        });
+      }
+    });
+
   }
-  else if(newUrl == "User")
+  else if(newUrl == "Appr")
   {
-    User.updateOne({adhaar:arg},{'card.status' : 'Active'}).exec((err, posts) => {
+    const cvv = Math.floor(Math.random()*(999-100+1)+100);
+    const cardNum = Math.floor(Math.random()*(9999999999-1000000000+1)+1000000000);
+
+    User.updateOne({aadhar:arg},{'card.status' : 'Active' , 'card.cvv' : cvv , 'card.number' : cardNum}).exec((err, posts) => {
       if(err)
         console.log(err)
       else
         console.log(posts)
+      User.find({"card.status":"Inactive"},function(err, foundUsers){
+        res.render("approve",{users: foundUsers});
+      });
     })
   }
   else if(newUrl == "Dele")
