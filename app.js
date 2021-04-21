@@ -185,7 +185,7 @@ app.get("/payBalance",function(req,res){
 });
 
 app.post("/payBalance",function(req,res){
-  
+
   res.render("payBalance");
 });
 // CARD PLANS PAGE
@@ -220,36 +220,46 @@ app.post("/transfer",function(req,res){
   cvv = req.body.cvv;
   accno = req.body.accno;
   console.log(amt,cvv,accno);
- 
-  User.findOne({'card.cvv':cvv},function(err,foundUser){
-    if(amt>parseInt(foundUser.card.balance)){
-      res.render("error",{err:"insufficientBal"})
+
+  sess = req.session;
+  const mail = sess.email;
+  if(mail==null || mail==undefined){
+    res.render("error",{err:"session"});
+  }
+  User.findOne({'card.cvv':cvv,'email':mail},function(err,foundUser){
+    if(foundUser){
+      if(amt>parseInt(foundUser.card.balance)){
+        res.render("error",{err:"insufficientBal"})
+      }
+      else{
+        const deduc = parseInt(foundUser.card.balance) - amt;
+        console.log(deduc);
+        User.updateOne({'card.cvv':cvv},{'card.balance':deduc}).exec((err,user) => {
+          if(err)
+            console.log(err);
+            else{
+              console.log(user)
+            }
+            User.findOne({'card.number':accno},function(err,foundUser){
+              const amot = parseInt(foundUser.card.balance) + amt;
+              console.log(amot);
+              User.updateOne({'card.number':accno},{'card.balance':amot}).exec((err,user) => {
+                if(err)
+                  console.log(err);
+                  else{
+                    console.log(user);
+                    res.render("transfer");
+                  }
+              });
+            });
+        });
+      }
     }
     else{
-      const deduc = parseInt(foundUser.card.balance) - amt;
-      console.log(deduc);
-      User.updateOne({'card.cvv':cvv},{'card.balance':deduc}).exec((err,user) => {
-        if(err)
-          console.log(err);
-          else{
-            console.log(user)
-          }
-          User.findOne({'card.number':accno},function(err,foundUser){
-            const amot = parseInt(foundUser.card.balance) + amt;
-            console.log(amot);
-            User.updateOne({'card.number':accno},{'card.balance':amot}).exec((err,user) => {
-              if(err)
-                console.log(err);
-                else{
-                  console.log(user);
-                  res.render("transfer");
-                }
-            });
-          });
-      });
-    } 
+      res.render("error",{err:"cvv"});
+    }
   });
-  
+
 });
 app.get("/addplan",function(req,res){
   res.render("add-plan");
