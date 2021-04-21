@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const session = require('express-session');
+const _ = require("lodash");
 
 var sess;
 
@@ -26,13 +27,29 @@ const userSchema = {
     address : String,
     aadhar : String,
     dob : Date,
-    sex : String
-  };
-  
+    sex : String,
+    card: {
+      number : Number,
+      cvv : Number,
+      plan : String,
+      status : String
+    }
+};
+
 const detailSchema = {
-  
+
 }
 const User = new mongoose.model("User",userSchema);
+
+const planSchema = {
+  allowance : Number,
+  interest: Number,
+  name: String,
+  id: String
+};
+
+const Plan = new mongoose.model("Plan", planSchema);
+
 
 // LOGIN PAGE
 let name;
@@ -141,8 +158,8 @@ User.findOne({name:name},function(err,foundUser){
     }
     // res.render("view",{name:user.name,email:user.email,address:user.address,aadhar:user.aadhar,sex:user.sex,dob:user.dob});
   });
-  
-  
+
+
 });
 
 
@@ -154,8 +171,10 @@ app.get("/payBalance",function(req,res){
 
 // CARD PLANS PAGE
 
-app.get("/cardPlans",function(req,res){
-  res.render("cardPlans");
+app.get("/viewplan",function(req,res){
+  Plan.find({}, function(err, foundPlans){
+    res.render("cardPlans",{plans: foundPlans});
+  });
 });
 
 // TRANSFER PAGE
@@ -164,8 +183,31 @@ app.get("/transfer",function(req,res){
   res.render("transfer");
 });
 
-app.get("/admin-plan",function(req,res){
-  res.render("admin-plan");
+app.get("/addplan",function(req,res){
+  res.render("add-plan");
+});
+
+app.get("/delplan",function(req,res){
+  Plan.find({}, function(err, foundPlans){
+    res.render("del-plan",{plans: foundPlans});
+  });
+});
+
+app.post("/addplan", function(req,res){
+  const newPlan = new Plan({
+      name : req.body.inputPlanName,
+      id : req.body.inputPlanID,
+      allowance : req.body.inputAllowance,
+      interest : req.body.inputInterestRate
+  });
+  newPlan.save(function(err){
+    if(err){
+      res.send(err);
+    }
+    else{
+      res.render("add-plan");
+    }
+  });
 });
 
 app.get("/logout", function(req,res){
@@ -178,8 +220,48 @@ app.get("/logout", function(req,res){
   });
 });
 
+//keep this function at the end !!!!
+app.get("/:url", function(req,res){
+  const url = _.capitalize(req.params.url);
+
+  newUrl = url.slice(0, 4);
+  arg = url.slice(4,);
+  console.log(newUrl, arg);
+  if(newUrl == "Plan")
+  {
+    //const mail = "a@b.com";
+    sess = req.session;
+    const mail = sess.email;
+    User.updateOne({email:mail},{ 'card.plan' : arg , 'card.status' : 'Inactive'}).exec((err, posts) => {
+      if(err)
+        console.log(err)
+      else
+        console.log(posts)
+    })
+  }
+  else if(newUrl == "User")
+  {
+    User.updateOne({adhaar:arg},{'card.status' : 'Active'}).exec((err, posts) => {
+      if(err)
+        console.log(err)
+      else
+        console.log(posts)
+    })
+  }
+  else if(newUrl == "Dele")
+  {
+    Plan.findOneAndRemove({id:arg}).exec((err, posts) => {
+      if(err)
+        console.log(err)
+      else
+        console.log(posts)
+        Plan.find({}, function(err, foundPlans){
+          res.render("del-plan",{plans: foundPlans});
+        });
+    });
+  }
+});
 
 app.listen(3000,function(){
 console.log("Server started on port 3000.");
 });
-  

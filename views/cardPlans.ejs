@@ -16,24 +16,25 @@
   <p class="lead">The following are all available card plans, feel free to browse and apply for any card of your choosing. For any clarification you can contact us from any of the options given at the bottomm of the page.</p>
 </div>
 
+<% for( var i=0;i<plans.length;i++) {%>
+<% var link = "/plan"+plans[i].id %>
 <div class="container">
   <div class="card-deck mb-3 text-center">
     <div class="card mb-4 shadow-sm">
       <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Pro</h4>
+        <h4 class="my-0 font-weight-normal"><%= plans[i].name %></h4>
       </div>
       <div class="card-body">
-        <h1 class="card-title pricing-card-title">$15 <small class="text-muted">/ mo</small></h1>
+        <h1 class="card-title pricing-card-title"><%= plans[i].interest %>% <small class="text-muted">/ yr</small></h1>
         <ul class="list-unstyled mt-3 mb-4">
-          <li>20 users included</li>
-          <li>10 GB of storage</li>
-          <li>Priority email support</li>
-          <li>Help center access</li>
+          <li>Rs. <%= plans[i].allowance %></li>
+          <li>Plan ID <%= plans[i].id %></li>
         </ul>
-        <button type="button" class="btn btn-lg btn-block btn-primary">Get started</button>
+        <a href=<%= link %> ><button type="button" class="btn btn-lg btn-block btn-primary">Apply</button></a>
       </div>
     </div>
   </div>
+<% } %>
 
   <footer class="pt-4 my-md-5 pt-md-5 border-top">
     <div class="row">
