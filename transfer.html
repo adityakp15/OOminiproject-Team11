@@ -51,7 +51,7 @@
             }
         </style>
 		<!-- Custom styles for this template -->
-		<link href="css/signin.css" rel="stylesheet">
+		<link href="public/css/signin.css" rel="stylesheet">
 	</head>
     <div id ="header">
         <nav class="navbar bg-dark navbar-expand-lg navbar-dark">
@@ -82,3 +82,29 @@
         </nav>
     </div>
     <body class="text-center">
+<form class = "form-signin">
+    <div class="container" style="max-width: 500px;">
+        <i class="fas fa-credit-card fa-4x" style="padding:10px"></i>
+        <h2>Bank Transfer</h2>
+        <p class="lead">Please provide the details of the account you wish to transfer to. </p>
+        <h5>Account details : </h5>
+        <form class="needs-validation" novalidate>
+            <label for="cc-name" class="sr-only">Full name</label>
+            <input type="text" class="form-control" id="cc-name" placeholder="Full Name" value="" required>
+
+            <label for="accno" class="sr-only">Account Number</label>
+            <input type="text" class="form-control" id="accno" placeholder="Account Number" value="" required>
+
+            <label for="amt" class="sr-only">Amount</label>
+            <input type="text" class="form-control" id="amt" placeholder="Amount" value="" required>
+
+            <label for="cvv" class="sr-only">CVV</label>
+            <input type="text" class="form-control" id="cvv" placeholder="CVV" value="" required>
+            
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Make Transfer</button>
+        </form>
+    </div>
+</form>
+</body>
+</html>
