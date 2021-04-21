@@ -1,0 +1,11 @@
+<%- include('partials/view-header') %>
+
+<% if(err=="cvv"){ %>
+  <h1>Authentication failed.Entered cvv does not match.</h1>
+<% } else if(err=="session"){ %>
+  <h1>Session expired.</h1>
+<% } else if(err=="insufficientBal"){ %>
+  <h1>Insufficient Balance.</h1>
+<% } %>
+
+<% include ('partials/footer') %>
