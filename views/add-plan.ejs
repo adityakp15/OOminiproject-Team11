@@ -1,66 +1,25 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.80.0">
-    <title>Signin Template · Bootstrap v4.6</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/sign-in/">
-
-
-
-    <!-- Bootstrap core CSS -->
-    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
-
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-
-
-    <!-- Custom styles for this template -->
-    <link href="css/admin-plan.css" rel="stylesheet">
-  </head>
-  <body class="text-center">
+<%- include('partials/addcard') %>
 
 <form class="form-signin" action="/addplan" method="POST">
-  <h1 class="h3 mb-3 font-weight-normal">Please enter details of new card plan.</h1>
+    <div class = "container">
+        <i class="fas fa-credit-card fa-4x" style="padding:10px"></i>
+        <h2>Enter details of new card plan.</h2>
 
-  <label for="inputPlanID" class="sr-only">Plan ID</label>
-  <input name="inputPlanID" class="form-control" placeholder="Plan ID" required autofocus>
+        <label for="inputPlanID" class="sr-only">Plan ID</label>
+        <input name="inputPlanID" class="form-control" placeholder="Plan ID" required autofocus>
 
-  <label for="inputPlanName" class="sr-only">Plan Name</label>
-  <input name="inputPlanName" class="form-control" placeholder="Plan Name">
+        <label for="inputPlanName" class="sr-only">Plan Name</label>
+        <input name="inputPlanName" class="form-control" placeholder="Plan Name">
 
-  <label for="inputInterestRate" class="sr-only">Interest Rate</label>
-  <input name="inputInterestRate" class="form-control" placeholder="Interest Rate">
+        <label for="inputInterestRate" class="sr-only">Interest Rate</label>
+        <input name="inputInterestRate" class="form-control" placeholder="Interest Rate">
 
-  <label for="inputAllowance" class="sr-only">Allowance</label>
-  <input name="inputAllowance" class="form-control" placeholder="Allowance">
+        <label for="inputAllowance" class="sr-only">Allowance</label>
+        <input name="inputAllowance" class="form-control" placeholder="Allowance">
 
-  <br>
-
-
-  <input type="submit" class="btn btn-lg btn-block btn-primary" name="addplan" value="ADD">
-
-  <p class="mt-5 mb-3 text-muted">&copy; 2018-2022</p>
+        <br>
+        <input type="submit" class="btn btn-lg btn-block btn-primary" name="addplan" value="ADD">
+    </div>
 </form>
 
 
