@@ -51,7 +51,7 @@
             }
         </style>
 		<!-- Custom styles for this template -->
-		<link href="css/signin.css" rel="stylesheet">
+		<link href="public/css/signin.css" rel="stylesheet">
 	</head>
     <div id ="header">
         <nav class="navbar bg-dark navbar-expand-lg navbar-dark">
@@ -82,3 +82,37 @@
         </nav>
     </div>
     <body class="text-center">
+<form class = "form-signin">
+    <div class="container" style="max-width: 500px;">
+        <div class="py-5 text-center">
+            <i class="fas fa-credit-card fa-4x" style="padding:10px"></i>
+            <h2>Bank Transfer</h2>
+            <p class="lead">Please provide the details of the account you wish to transfer to. </p>
+        </div>
+        <h4 class="mb-3">Account details</h4>
+        <form class="needs-validation" novalidate>
+            <label for="inputName" class="sr-only">Full name</label>
+            <input type="text" class="form-control" id="firstName" placeholder="Full Name" value="" required>
+            <div class="invalid-feedback">
+                Valid full name is required.
+            </div>
+
+            <label for="address" class="sr-only">Account Number</label>
+            <input type="text" class="form-control" id="address" placeholder="Account Number" value="" required>
+            <div class="invalid-feedback">
+                Please enter your shipping address.
+            </div>
+
+            <label for="cc-name" class="sr-only">Amount</label>
+            <input type="text" class="form-control" id="cc-name" placeholder="Amount" value="" required>
+            <div class="invalid-feedback">
+            Name on card is required
+            </div>
+            
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Make Transfer</button>
+        </form>
+    </div>
+</form>
+</body>
+</html>
