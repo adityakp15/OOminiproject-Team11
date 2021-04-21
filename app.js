@@ -205,9 +205,41 @@ app.get("/viewplan",function(req,res){
 // TRANSFER PAGE
 
 app.get("/transfer",function(req,res){
+  console.log("in transfer");
   res.render("transfer");
 });
 
+app.post("/transfer",function(req,res){
+  amt = parseInt(req.body.amount);
+  cvv = req.body.cvv;
+  accno = req.body.accno;
+  console.log(amt,cvv,accno);
+ 
+  User.findOne({'card.cvv':cvv},function(err,foundUser){
+    const deduc = parseInt(foundUser.card.balance) - amt;
+    console.log(deduc);
+    User.updateOne({'card.cvv':cvv},{'card.balance':deduc}).exec((err,user) => {
+      if(err)
+        console.log(err);
+        else{
+          console.log(user)
+        }
+        User.findOne({'card.number':accno},function(err,foundUser){
+          const amot = parseInt(foundUser.card.balance) + amt;
+          console.log(amot);
+          User.updateOne({'card.number':accno},{'card.balance':amot}).exec((err,user) => {
+            if(err)
+              console.log(err);
+              else{
+                console.log(user);
+                res.render("transfer");
+              }
+          });
+        });
+    });
+  });
+  
+});
 app.get("/addplan",function(req,res){
   res.render("add-plan");
 });
