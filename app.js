@@ -5,6 +5,7 @@ const ejs = require("ejs");
 const mongoose = require("mongoose");
 const session = require('express-session');
 const _ = require("lodash");
+const { toArray } = require("lodash");
 
 var sess;
 
@@ -181,12 +182,67 @@ User.findOne({name:name},function(err,foundUser){
 // PAY BALANCE PAGE
 
 app.get("/payBalance",function(req,res){
-  res.render("payBalance");
+  sess = req.session;
+  const mail = sess.email;
+  User.findOne({email:mail},function(err,foundUser){
+    if(err)
+      console.log(err);
+    else
+    {
+      Plan.findOne({id:foundUser.card.plan},function(err,foundPlan){
+        if(foundPlan)
+        {
+          console.log(foundUser);
+          const bal = parseInt(foundUser.card.balance);
+          const allowance = parseInt(foundPlan.allowance);
+          const amount = allowance - bal;
+          const interest = parseInt(foundPlan.interest);
+          const total = amount + ((interest/100)*amount);
+          res.render("payBalance",{amount:amount,interest:interest,total:total});
+        }
+
+      });
+
+    }
+
+  });
+  
 });
 
 app.post("/payBalance",function(req,res){
-  
-  res.render("payBalance");
+  sess = req.session;
+  const mail = sess.email;
+  if(mail==null || mail==undefined){
+    console.log("session error");
+    res.render("error",{err:"session"});
+  }
+  User.findOne({email:mail},function(err,foundUser){
+    if(err)
+      console.log(err);
+    else
+    {
+      Plan.findOne({id:foundUser.card.plan},function(err,foundPlan){
+        if(foundPlan)
+        {
+          const allowance = parseInt(foundPlan.allowance);
+          User.updateOne({email:mail},{'card.balance':allowance}).exec((err,user) => {
+            if(err)
+              console.log(err);
+              else{
+                console.log(user);
+                res.redirect("/dashboard");
+              }
+        });
+      }
+      else{
+        res.render("error",{err:"plan"});
+      }
+
+      });
+
+      }
+      
+  });
 });
 // CARD PLANS PAGE
 
