@@ -18,6 +18,7 @@
 
 <% for( var i=0;i<users.length;i++) {%>
 <% var link = "/appr"+users[i].aadhar %>
+<% var link2 = "/decl"+users[i].aadhar %>
 <div class="container">
   <div class="card-deck mb-3 text-center">
     <div class="card mb-4 shadow-sm">
@@ -30,6 +31,8 @@
           <li>Plan ID: <%= users[i].card.plan %></li>
         </ul>
         <a href=<%= link %> ><button type="button" class="btn btn-lg btn-block btn-primary">Approve</button></a>
+        <br>
+        <a href=<%= link2 %> ><button type="button" class="btn btn-lg btn-block btn-primary">Decline</button></a>
       </div>
     </div>
   </div>

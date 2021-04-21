@@ -156,10 +156,12 @@ User.findOne({name:name},function(err,foundUser){
         date = new Date(dob);
         const cardPlan = foundUser.card.plan;
         const status = foundUser.card.status;
+        const cardno = foundUser.card.number;
+        const cvv = foundUser.card.cvv;
         console.log(cardPlan,status);
         // console.log(date.getFullYear()+'-' + (date.getMonth()+1) + '-'+date.getDate());
         const dob2 = date.getDate() + '-' + (date.getMonth()+1)  +'-' +date.getFullYear();
-        res.render("view",{name:name,email:email,address:address,aadhar:aadhar,sex:sex,dob:dob2,plan:cardPlan,status:status});
+        res.render("view",{name:name,email:email,address:address,aadhar:aadhar,sex:sex,dob:dob2,plan:cardPlan,status:status,cardno:cardno,cvv:cvv});
       }
       // console.log(user.name,user.sex,user.address);
       // res.render("view",{name:user.name,email:user.email,address:user.address,aadhar:user.aadhar,sex:user.sex,dob:user.dob});
@@ -208,27 +210,32 @@ app.post("/transfer",function(req,res){
   console.log(amt,cvv,accno);
  
   User.findOne({'card.cvv':cvv},function(err,foundUser){
-    const deduc = parseInt(foundUser.card.balance) - amt;
-    console.log(deduc);
-    User.updateOne({'card.cvv':cvv},{'card.balance':deduc}).exec((err,user) => {
-      if(err)
-        console.log(err);
-        else{
-          console.log(user)
-        }
-        User.findOne({'card.number':accno},function(err,foundUser){
-          const amot = parseInt(foundUser.card.balance) + amt;
-          console.log(amot);
-          User.updateOne({'card.number':accno},{'card.balance':amot}).exec((err,user) => {
-            if(err)
-              console.log(err);
-              else{
-                console.log(user);
-                res.render("transfer");
-              }
+    if(amt>foundUser.cardbalance){
+      res.render("error",{err:"insufficientBal"})
+    }
+    else{
+      const deduc = parseInt(foundUser.card.balance) - amt;
+      console.log(deduc);
+      User.updateOne({'card.cvv':cvv},{'card.balance':deduc}).exec((err,user) => {
+        if(err)
+          console.log(err);
+          else{
+            console.log(user)
+          }
+          User.findOne({'card.number':accno},function(err,foundUser){
+            const amot = parseInt(foundUser.card.balance) + amt;
+            console.log(amot);
+            User.updateOne({'card.number':accno},{'card.balance':amot}).exec((err,user) => {
+              if(err)
+                console.log(err);
+                else{
+                  console.log(user);
+                  res.render("transfer");
+                }
+            });
           });
-        });
-    });
+      });
+    } 
   });
   
 });
@@ -335,6 +342,18 @@ app.get("/:url", function(req,res){
     const cardNum = Math.floor(Math.random()*(9999999999-1000000000+1)+1000000000);
 
     User.updateOne({aadhar:arg},{'card.status' : 'Active' , 'card.cvv' : cvv , 'card.number' : cardNum}).exec((err, posts) => {
+      if(err)
+        console.log(err)
+      else
+        console.log(posts)
+      User.find({"card.status":"Inactive"},function(err, foundUsers){
+        res.render("approve",{users: foundUsers});
+      });
+    })
+  }
+  else if(newUrl == "Decl")
+  {
+    User.updateOne({aadhar:arg},{'card.status' : null , 'card.cvv' : null , 'card.number' : null, 'card.balance':null,'card.plan':null}).exec((err, posts) => {
       if(err)
         console.log(err)
       else
