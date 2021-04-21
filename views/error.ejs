@@ -1,17 +1,27 @@
 <%- include('partials/view-header') %>
 
-<div class="form-signin">
-    <div class = "container">
-        <% if(err=="cvv"){ %>
-        <h1>Authentication failed.Entered cvv does not match.</h1>
-        <% } else if(err=="session"){ %>
-        <h1>Session expired.</h1>
-        <% } else if(err=="insufficientBal"){ %>
-        <h1>Insufficient Balance.</h1>
-        <% } else if(err=="plan"){ %>
-        <h1>No active plan.</h1>
-        <% } %>
-    <div>
+<div class="container-error">
+  <% if(err=="cvv"){ %>
+    <i class="fas fa-times-circle fa-4x"></i>
+    <br>
+    <br>
+    <h1>Authentication failed. Entered cvv does not match.</h1>
+  <% } else if(err=="session"){ %>
+    <i class="fas fa-user-slash fa-4x"></i>
+    <br>
+    <br>
+    <h1>Session expired.</h1>
+  <% } else if(err=="insufficientBal"){ %>
+    <i class="fas fa-wallet fa-4x"></i>
+    <br>
+    <br>
+    <h1>Insufficient Balance.</h1>
+  <% } else if(err=="plan"){ %>
+    <i class="fas fa-credit-card fa-4x"></i>
+    <br>
+    <br>
+    <h1>No active plan.</h1>
+  <% } %>
 </div>
 
 <% include ('partials/footer') %>

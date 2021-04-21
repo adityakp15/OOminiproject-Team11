@@ -84,3 +84,14 @@ td, th {
 tr:nth-child(even) {
     background-color: #ffffff;
 }
+
+.container-error{
+    margin: auto;
+    text-align: center;
+    background-color: rgb(233, 235, 241);
+    border-radius: 9px;
+    border-top: 10px solid #79a6fe;
+    border-bottom: 10px solid #79a6fe;
+    padding: 20px;
+    box-shadow: 1px 1px 100px 1px rgb(151, 154, 161);
+  }
