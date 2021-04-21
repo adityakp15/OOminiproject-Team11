@@ -36,9 +36,6 @@ const userSchema = {
     }
 };
 
-const detailSchema = {
-
-}
 const User = new mongoose.model("User",userSchema);
 
 const planSchema = {
@@ -66,32 +63,39 @@ app.post("/login", function(req,res){
 const emailid = req.body.email;
 const pwd = req.body.password;
 // console.log(emailid,pwd);
-User.findOne({email: emailid, password: pwd}, function(err,foundUser){
-    if(err){
-    console.log(err);
-    }
-    else{
-    if(foundUser){
-        sess = req.session;
-        console.log(sess);
-        sess.email = emailid;
-        User.find({email:emailid},function(err,user){
-          if(err)
-          {
-            console.log(err);
-          }
-        });
-        sess.name = foundUser.name;
-        const name = sess.name;
-        console.log(name);
-        console.log("rendering dashboard");
-        res.render("dashboard",{name:foundUser.name});
-        console.log("logged in",emailid,pwd);
-    }
-    else{
-        res.render("login");
-    }
-    }});
+if(emailid === "admin@ccps.com" && pwd === "admin")
+{
+  res.render("admin-dash");
+}
+else{
+  User.findOne({email: emailid, password: pwd}, function(err,foundUser)
+  {
+      if(err){
+      console.log(err);
+      }
+      else{
+      if(foundUser){
+          sess = req.session;
+          console.log(sess);
+          sess.email = emailid;
+          User.find({email:emailid},function(err,user){
+            if(err)
+            {
+              console.log(err);
+            }
+          });
+          sess.name = foundUser.name;
+          const name = sess.name;
+          console.log(name);
+          console.log("rendering dashboard");
+          res.render("dashboard",{name:foundUser.name});
+          console.log("logged in",emailid,pwd);
+      }
+      else{
+          res.render("login");
+      }
+      }});
+   }
 });
 
 // REGISTER PAGE
@@ -219,6 +223,28 @@ app.get("/logout", function(req,res){
         res.redirect('/');
   });
 });
+
+// CARD CATALOG
+app.get("/cardPlans",function(req , res){
+  res.render("cardPlans");
+
+});
+
+// ADMIN STUFFS
+
+// ADD PLAN
+app.get("/add-plan",function(req , res){
+  res.render("add-plan");
+
+});
+
+// DELETE PLAN
+app.get("/del-plan",function(req , res){
+  res.render("del-plan");
+
+});
+
+// VIEW PLAN
 
 //keep this function at the end !!!!
 app.get("/:url", function(req,res){
