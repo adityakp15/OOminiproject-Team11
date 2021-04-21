@@ -231,20 +231,9 @@ app.get("/cardPlans",function(req , res){
 });
 
 // ADMIN STUFFS
-
-// ADD PLAN
-app.get("/add-plan",function(req , res){
-  res.render("add-plan");
-
+app.get("/admin-dash",function(req,res){
+  res.render("admin-dash");
 });
-
-// DELETE PLAN
-app.get("/del-plan",function(req , res){
-  res.render("del-plan");
-
-});
-
-// VIEW PLAN
 
 //keep this function at the end !!!!
 app.get("/:url", function(req,res){
@@ -267,7 +256,7 @@ app.get("/:url", function(req,res){
   }
   else if(newUrl == "User")
   {
-    User.updateOne({adhaar:arg},{'card.status' : 'Active'}).exec((err, posts) => {
+    User.updateOne({aadhaar:arg},{'card.status' : 'Active'}).exec((err, posts) => {
       if(err)
         console.log(err)
       else
