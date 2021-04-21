@@ -1,0 +1,40 @@
+<%- include('partials/dash-header') %>
+<section id="hero" class="d-flex align-items-center">
+    <div class="container" data-aos="zoom-out" data-aos-delay="100">
+        <h1>Welcome <span> Admin </span> </h1>
+    </div>
+</section>
+<main id="main">
+    <section id="services" class="services">
+        <div class="container" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Functionalities</h2>
+                <p>What's on your mind for today?</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bx bx-plus"></i></div>
+                        <h4><a href="/addplan">Add plans</a></h4>
+                        <p>Got a brilliant new plan on your mind? Head here.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bx bx-minus"></i></div>
+                        <h4><a href="/delplan">Delete plans</a></h4>
+                        <p>Want to get rid of an existing plan? Head here.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bx bx-money"></i></div>
+                        <h4><a href="">View Applications</a></h4>
+                        <p>Head here to view the pending card applications.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<% include ('partials/footer') %>
