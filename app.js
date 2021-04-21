@@ -153,15 +153,19 @@ User.findOne({name:name},function(err,foundUser){
         const sex = foundUser.sex;
         const dob = foundUser.dob;
         date = new Date(dob);
+        const cardPlan = foundUser.card.plan;
+        const status = foundUser.card.status;
+        console.log(cardPlan,status);
         // console.log(date.getFullYear()+'-' + (date.getMonth()+1) + '-'+date.getDate());
         const dob2 = date.getDate() + '-' + (date.getMonth()+1)  +'-' +date.getFullYear();
-        res.render("view",{name:name,email:email,address:address,aadhar:aadhar,sex:sex,dob:dob2});
+        res.render("view",{name:name,email:email,address:address,aadhar:aadhar,sex:sex,dob:dob2,plan:cardPlan,status:status});
       }
       // console.log(user.name,user.sex,user.address);
       // res.render("view",{name:user.name,email:user.email,address:user.address,aadhar:user.aadhar,sex:user.sex,dob:user.dob});
     }
     // res.render("view",{name:user.name,email:user.email,address:user.address,aadhar:user.aadhar,sex:user.sex,dob:user.dob});
   });
+
 
 
 });
