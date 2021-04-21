@@ -161,6 +161,10 @@ User.findOne({name:name},function(err,foundUser){
         const dob2 = date.getDate() + '-' + (date.getMonth()+1)  +'-' +date.getFullYear();
         res.render("view",{name:name,email:email,address:address,aadhar:aadhar,sex:sex,dob:dob2,plan:cardPlan,status:status});
       }
+      else{
+        console.log("session error");
+        res.render("error",{err:"session"});
+      }
       // console.log(user.name,user.sex,user.address);
       // res.render("view",{name:user.name,email:user.email,address:user.address,aadhar:user.aadhar,sex:user.sex,dob:user.dob});
     }
@@ -188,6 +192,10 @@ app.get("/viewplan",function(req,res){
       if(foundUser){
         const foundID = foundUser.card.plan;
         res.render("cardPlans",{plans: foundPlans,id:foundID});
+      }
+      else{
+        console.log("session error");
+        res.render("error",{err:"session"});
       }
     });
 
@@ -259,6 +267,10 @@ app.get("/terminate",function(req,res)
 {
   sess = req.session;
   const mail = sess.email;
+  if(mail==null || mail==undefined){
+      console.log("session error");
+      res.render("error",{err:"session"});
+  }
   console.log(mail);
   User.updateOne({email:mail},{"card.plan":null,"card.status":null,"card.number":null,"card.cvv":null,"card.balance":null}).exec((err, posts) => {
     if(err)
@@ -282,6 +294,10 @@ app.get("/:url", function(req,res){
     //const mail = "a@b.com";
     sess = req.session;
     const mail = sess.email;
+    if(mail==null || mail==undefined){
+        console.log("session error");
+        res.render("error",{err:"session"});
+    }
     Plan.findOne({id : arg},function(err,foundPlan){
       if(foundPlan){
         const balance = foundPlan.allowance;
