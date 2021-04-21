@@ -131,7 +131,9 @@ app.post("/register", function(req,res){
 // DASHBOARD
 
 app.get("/dashboard", function(req , res){
-  res.render("dashboard",{name:sess.name});
+  sess = req.session;
+  const name = sess.name;
+  res.render("dashboard",{name:name});
   console.log("in dashboard");
   console.log(name);
 });
@@ -184,11 +186,19 @@ User.findOne({name:name},function(err,foundUser){
 app.get("/payBalance",function(req,res){
   sess = req.session;
   const mail = sess.email;
+  if(mail==null || mail==undefined){
+    console.log("session error");
+    res.render("error",{err:"session"});
+  }
+
   User.findOne({email:mail},function(err,foundUser){
     if(err)
       console.log(err);
     else
     {
+      if(!foundUser.card.plan){
+        res.render("error",{err:"plan"});
+      }
       Plan.findOne({id:foundUser.card.plan},function(err,foundPlan){
         if(foundPlan)
         {
@@ -200,13 +210,17 @@ app.get("/payBalance",function(req,res){
           const total = amount + ((interest/100)*amount);
           res.render("payBalance",{amount:amount,interest:interest,total:total});
         }
+        else{
+          console.log("not found plan");
+          res.render("error",{err:"plan"});
+        }
 
       });
 
     }
 
   });
-  
+
 });
 
 app.post("/payBalance",function(req,res){
@@ -221,9 +235,13 @@ app.post("/payBalance",function(req,res){
       console.log(err);
     else
     {
+      if(!foundUser.card.plan){
+        res.render("error",{err:"plan"});
+      }
       Plan.findOne({id:foundUser.card.plan},function(err,foundPlan){
         if(foundPlan)
         {
+          console.log("found plan");
           const allowance = parseInt(foundPlan.allowance);
           User.updateOne({email:mail},{'card.balance':allowance}).exec((err,user) => {
             if(err)
@@ -235,13 +253,14 @@ app.post("/payBalance",function(req,res){
         });
       }
       else{
+        console.log("not found plan");
         res.render("error",{err:"plan"});
       }
 
       });
 
       }
-      
+
   });
 });
 // CARD PLANS PAGE
@@ -250,6 +269,9 @@ app.get("/viewplan",function(req,res){
   Plan.find({}, function(err, foundPlans){
     sess = req.session;
     const mail = sess.email;
+    if(mail==null || mail==undefined){
+      res.render("error",{err:"session"});
+    }
     User.findOne({email:mail},function(err,foundUser){
       if(foundUser){
         const foundID = foundUser.card.plan;
