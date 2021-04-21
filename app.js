@@ -184,6 +184,10 @@ app.get("/payBalance",function(req,res){
   res.render("payBalance");
 });
 
+app.post("/payBalance",function(req,res){
+  
+  res.render("payBalance");
+});
 // CARD PLANS PAGE
 
 app.get("/viewplan",function(req,res){
@@ -218,7 +222,7 @@ app.post("/transfer",function(req,res){
   console.log(amt,cvv,accno);
  
   User.findOne({'card.cvv':cvv},function(err,foundUser){
-    if(amt>foundUser.cardbalance){
+    if(amt>parseInt(foundUser.card.balance)){
       res.render("error",{err:"insufficientBal"})
     }
     else{

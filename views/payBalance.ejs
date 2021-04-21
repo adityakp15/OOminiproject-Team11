@@ -1,5 +1,5 @@
 <%- include('partials/paymentheader') %>
-<form class="form-signin">
+<form class="form-signin" action="/payBalance" method="POST">
     <br><br>
     <div class="container" style="max-width: 600px;">
         <i class="fas fa-credit-card fa-4x" style="padding:10px"></i>
@@ -32,7 +32,7 @@
                 </ul>
             </div>
             <div class="col-md-8 order-md-1">
-                <h5>Billing Deatils : </h5>
+                <h5>Billing Details : </h5>
                 <form class="needs-validation" novalidate>
                     <div class="mb-3">
                         <label for="cc-name" class="sr-only">Full name</label>
