@@ -182,7 +182,15 @@ app.get("/payBalance",function(req,res){
 
 app.get("/viewplan",function(req,res){
   Plan.find({}, function(err, foundPlans){
-    res.render("cardPlans",{plans: foundPlans});
+    sess = req.session;
+    const mail = sess.email;
+    User.findOne({email:mail},function(err,foundUser){
+      if(foundUser){
+        const foundID = foundUser.card.plan;
+        res.render("cardPlans",{plans: foundPlans,id:foundID});
+      }
+    });
+
   });
 });
 
@@ -278,6 +286,22 @@ app.get("/admin-dash",function(req,res){
   res.render("admin-dash");
 });
 
+//terminate PAGE
+app.get("/terminate",function(req,res)
+{
+  sess = req.session;
+  const mail = sess.email;
+  console.log(mail);
+  User.updateOne({email:mail},{"card.plan":null,"card.status":null,"card.number":null,"card.cvv":null,"card.balance":null}).exec((err, posts) => {
+    if(err)
+      console.log(err)
+    else{
+      console.log(posts);
+    }
+    res.redirect("/view");
+  })
+})
+
 //keep this function at the end !!!!
 app.get("/:url", function(req,res){
   const url = _.capitalize(req.params.url);
@@ -299,6 +323,7 @@ app.get("/:url", function(req,res){
             console.log(err);
           else
             console.log(posts);
+          res.redirect("/view");
         });
       }
     });
