@@ -19,7 +19,8 @@ app.use(bodyParser.urlencoded({
   extended:true
 }));
 
-mongoose.connect("mongodb+srv://admin-ccps:admin@cluster0.ocxae.mongodb.net/ccDB?retryWrites=true&w=majority/ccDB");
+// mongoose.connect("mongodb+srv://admin-ccps:admin@cluster0.ocxae.mongodb.net/ccDB?retryWrites=true&w=majority/ccDB");
+mongoose.connect("mongodb://localhost:27017/ccDB");
 
 const userSchema = {
     name : String,
