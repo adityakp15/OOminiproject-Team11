@@ -30,7 +30,14 @@
           <li>Rs. <%= plans[i].allowance %></li>
           <li>Plan ID <%= plans[i].id %></li>
         </ul>
-        <a href=<%= link %> ><button type="button" class="btn btn-lg btn-block btn-primary">Apply</button></a>
+        <% if(plans[i].id == id){ %>
+          <a href=<%= link %> ><button type="button" disabled class="btn btn-lg btn-block btn-primary">Applied</button></a>
+        <% } else if(id == null || id == undefined) { %>
+          <a href=<%= link %> ><button type="button" class="btn btn-lg btn-block btn-primary">Apply</button></a>
+        <% } else { %>
+          <a href=<%= link %> ><button type="button" class="btn btn-lg btn-block btn-primary">Change Plan</button></a>
+        <% } %>
+
       </div>
     </div>
   </div>
